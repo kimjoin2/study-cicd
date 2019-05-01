@@ -7,10 +7,12 @@ jobs:
       # start proprietary DB using private Docker image
       # with credentials stored in the UI
       - run: |
-          docker login -u $DOCKER_USER -p $DOCKER_PASS
+          docker login --username=$DOCKER_USER --password=$DOCKER_PASS
 
       # build the application image
       - run: docker build -t kimjoin2/study-cicd .
 
       # deploy the image
       - run: docker push kimjoin2/study-cicd:latest
+
+      - run: ssh $SSH_USER@$SSH_HOST deployment.sh
