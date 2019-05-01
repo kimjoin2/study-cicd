@@ -16,4 +16,4 @@ jobs:
       - run: docker push kimjoin2/study-cicd:latest
 
       # deploy to server
-      - run: ssh $SSH_USER@$SSH_HOST deployment.sh
+      - run: ssh $SSH_USER@$SSH_HOST "deployment.sh"
