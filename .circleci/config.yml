@@ -17,7 +17,4 @@ jobs:
 
       # deploy to server
       - run: |
-          echo $SSH_USER
-          echo $SSH_HOST
-          ls -al ~/.ssh
-          ssh $SSH_USER@$SSH_HOST "deployment.sh"
+          ssh $SSH_USER@$SSH_HOST "~/deployment.sh"
