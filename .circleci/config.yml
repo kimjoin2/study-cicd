@@ -1,17 +1,16 @@
 version: 2
 jobs:
   build:
-    machine: true
     steps:
       - checkout
-      # start proprietary DB using private Docker image
-      # with credentials stored in the UI
+
+      # login to docker hub
       - run: docker login --username=$DOCKER_USER --password=$DOCKER_PASS
 
       # build the application image
       - run: docker build -t kimjoin2/study-cicd .
 
-      # deploy the image
+      # deploy the image to docker hub
       - run: docker push kimjoin2/study-cicd:latest
 
       # deploy to server
