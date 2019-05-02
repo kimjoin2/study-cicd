@@ -18,16 +18,16 @@ jobs:
       - run: docker build -t kimjoin2/study-cicd .
 
   deploy_hub:
-    - machine: true
-    - steps:
+    machine: true
+    steps:
       - checkout
 
       # deploy the image to docker hub
       - run: docker push kimjoin2/study-cicd:latest
 
   deploy_server:
-    - machine: true
-    - steps:
+    machine: true
+    steps:
       - checkout
       # deploy to server
       - run: ssh $SSH_USER@$SSH_HOST "~/deployment.sh"
