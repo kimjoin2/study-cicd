@@ -28,7 +28,7 @@ jobs:
   deploy_server:
     - machine: true
     - steps:
-        - checkout
+      - checkout
       # deploy to server
       - run: ssh $SSH_USER@$SSH_HOST "~/deployment.sh"
 
