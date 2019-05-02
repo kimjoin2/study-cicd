@@ -45,4 +45,4 @@ workflows:
             - build
       - deploy_server:
           requires:
-            -deploy_hub
+            - deploy_hub
