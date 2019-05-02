@@ -1,48 +1,36 @@
 version: 2
 jobs:
-  login:
-    machine: true
-    steps:
-      - checkout
-
-      # login to docker hub
-      - run: docker login --username=$DOCKER_USER --password=$DOCKER_PASS
-
-  build:
+  build_and_deploy_hub:
     # use linux machine for docker command
     machine: true
     steps:
       - checkout
-
+      # login to docker hub
+      - run:
+          name: login docker hub
+          command: docker login --username=$DOCKER_USER --password=$DOCKER_PASS
       # build the application image
-      - run: docker build -t kimjoin2/study-cicd .
-
-  deploy_hub:
-    machine: true
-    steps:
-      - checkout
-
+      - run:
+          name: build docker image
+          command: docker build -t kimjoin2/study-cicd .
       # deploy the image to docker hub
-      - run: docker push kimjoin2/study-cicd:latest
+      - run:
+          name: deploy to docker hub
+          command: docker push kimjoin2/study-cicd:latest
 
   deploy_server:
     machine: true
     steps:
-      - checkout
       # deploy to server
-      - run: ssh $SSH_USER@$SSH_HOST "~/deployment.sh"
+      - run:
+          name: deploy to server
+          command: ssh $SSH_USER@$SSH_HOST "~/deployment.sh"
 
 workflows:
   version: 2
   build_and_deploy:
     jobs:
-      - login
-      - build:
-          requires:
-            - login
-      - deploy_hub:
-          requires:
-            - build
+      - build_and_deploy_hub
       - deploy_server:
           requires:
-            - deploy_hub
+            - build_and_deploy_hub
