@@ -17,7 +17,7 @@ func main() {
 
 func TestController(w http.ResponseWriter, r *http.Request) {
 	_ = r
-	_, err := fmt.Fprintln(w, "Hello World!")
+	_, err := fmt.Fprintln(w, "<h1>Hello World!</h1>")
 	if err != nil {
 		log.Println(err)
 		w.WriteHeader(http.StatusInternalServerError)
