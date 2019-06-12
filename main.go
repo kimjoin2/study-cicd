@@ -16,8 +16,18 @@ func main() {
 }
 
 func TestController(w http.ResponseWriter, r *http.Request) {
+	html := `
+<html>
+<body>
+<div>
+<video controls loop>
+    <source src="https://d2qguwbxlx1sbt.cloudfront.net/TextInMotion-VideoSample-1080p.mp4" type="video/mp4">
+</video>
+</div>
+</body>
+</html>`
 	_ = r
-	_, err := fmt.Fprintln(w, "<h5><div><video controls loop><source src'https://d2qguwbxlx1sbt.cloudfront.net/TextInMotion-VideoSample-1080p.mp4' type='video/mp4'></video></div></h5>")
+	_, err := fmt.Fprintln(w, html)
 	if err != nil {
 		log.Println(err)
 		w.WriteHeader(http.StatusInternalServerError)
