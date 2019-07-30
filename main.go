@@ -18,6 +18,7 @@ func main() {
 func TestController(w http.ResponseWriter, r *http.Request) {
 	html := `
 <html>
+<style>* {margin:0; padding:0;}</style>
 <body>
 <div>
 <video autoplay muted loop>
