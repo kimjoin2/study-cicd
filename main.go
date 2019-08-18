@@ -10,6 +10,8 @@ const BumsKimCom = "bumskim.com"
 
 func main() {
 
+	// TODO : need ssl certification for https
+	//        it has bug (https -> http redirect fail cause of https certification
 	go func() {
 		if err := http.ListenAndServe(":443", http.HandlerFunc(redirectTLS)); err != nil {
 			log.Fatalf("ListenAndServe error: %v", err)
