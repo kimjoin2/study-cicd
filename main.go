@@ -6,13 +6,26 @@ import (
 	"net/http"
 )
 
+const BumsKimCom = "bumskim.com"
+
 func main() {
-	http.HandleFunc("/", TestController)
+
+	go func() {
+		if err := http.ListenAndServe(":443", http.HandlerFunc(redirectTLS)); err != nil {
+			log.Fatalf("ListenAndServe error: %v", err)
+		}
+	}()
+
 	log.Println("server start!")
+	http.HandleFunc("/", TestController)
 	err := http.ListenAndServe(":80", nil)
 	if err != nil {
 		log.Println(err)
 	}
+}
+
+func redirectTLS(w http.ResponseWriter, r *http.Request) {
+	http.Redirect(w, r, "http://"+BumsKimCom+r.RequestURI, http.StatusTemporaryRedirect)
 }
 
 func TestController(w http.ResponseWriter, r *http.Request) {
