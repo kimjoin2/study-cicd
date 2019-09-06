@@ -1,4 +1,4 @@
-FROM golang:1.11-alpine AS build
+FROM golang:1.13-alpine AS build
 COPY ./ /go/src/study-cicd/
 WORKDIR /go/src/study-cicd/
 RUN go build -o study-cicd

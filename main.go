@@ -14,7 +14,7 @@ func main() {
 
 	r := mux.NewRouter()
 	r.PathPrefix("/.well-known/acme-challenge/").Handler(
-		http.StripPrefix("/.well-known/acme-challenge/", http.FileServer(http.Dir("./letsencrypt/"))))
+		http.StripPrefix("/.well-known/acme-challenge/", http.FileServer(http.Dir("/app/letsencrypt/"))))
 	http.Handle("/", r)
 	srv := &http.Server{
 		Handler:      r,
