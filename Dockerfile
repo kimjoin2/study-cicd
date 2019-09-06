@@ -9,6 +9,7 @@ FROM alpine:3.7
 #  && update-ca-certificates --fresh
 RUN mkdir -p /app
 COPY --from=build /go/src/study-cicd/study-cicd /app/study-cicd
+COPY ./letsencrypt/ /app/letsencrypt/
 
 EXPOSE 80
 EXPOSE 443
